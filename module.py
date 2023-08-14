@@ -2,26 +2,22 @@ import cv2 as cv
 import numpy as np
 
 def oppening_an_image():
-    import cv2 as cv
     img=cv.imread('Photos/cat.jpg')
     cv.imshow('Photo',img)
     cv.waitKey(0)
 
 def image_in_grayscale():
-    import cv2 as cv
     img=cv.imread('Photos/cat.jpg', cv.IMREAD_GRAYSCALE)
     cv.imshow('Photo',img)
     cv.waitKey(0)
 
 def img_in_HSV():
-     import cv2 as cv
      img = cv.imread('Photos/park.jpg')
      hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
      cv.imshow('HSV', hsv)
      cv.waitKey(0)
 
 def oppening_an_video():
-    import cv2 as cv
     capture=cv.VideoCapture('Videos/dog.mp4')
     while True:
         isTrue,frame=capture.read()
@@ -32,7 +28,6 @@ def oppening_an_video():
     cv.destroyAllWindows()
 
 def resize_an_image():
-    import cv2 as cv
     img=cv.imread('Photos/cat.jpg')
     cv.imshow('Cat',img)
     def rescaleFrame(frame,scale=0.75):
@@ -45,7 +40,6 @@ def resize_an_image():
     cv.waitKey(0)
 
 def resizing_an_video():
-    import cv2 as cv
     capture=cv.VideoCapture('Videos/dog.mp4')
     def rescaleFrame(frame,scale=0.75):
         width=int(frame.shape [1]*scale)
@@ -64,8 +58,6 @@ def resizing_an_video():
     cv.destroyAllWindows()
 
 def shapessss():
-    import cv2 as cv
-    import numpy as np
     blank = np.zeros((500,500,3), dtype='uint8')
     cv.imshow ('blank', blank)
     blank[200:300, 300:400] = 0,255,0
@@ -83,8 +75,6 @@ def shapessss():
     cv.waitKey(0)
 
 def text():
-    import cv2 as cv
-    import numpy as np
     blank = np.zeros((500,500,3), dtype='uint8')
     cv.imshow ('blank', blank)
     cv.putText(blank, 'insert text here', (0,255), cv.FONT_ITALIC, 1.0,(0,255,0))
@@ -92,7 +82,6 @@ def text():
     cv.waitKey(0)
 
 def blur_gassianblur():
-        import cv2 as cv
         img = cv.imread('Photos/cat.jpg')
         blur = cv.GaussianBlur(img, (5,5), cv.BORDER_DEFAULT)
         cv.imshow('blured', blur)
@@ -100,14 +89,12 @@ def blur_gassianblur():
         cv.waitKey(0)
 
 def canny_edge():
-        import cv2 as cv
         img = cv.imread('Photos/cat.jpg')
         canny = cv.Canny(img, 125,175)
         cv.imshow('canny', canny)
         cv.waitKey(0)
 
 def dilate():
-        import cv2 as cv
         img = cv.imread('Photos/cat.jpg')
         canny = cv.Canny(img, 125,175)
         dilated = cv.dilate(canny, (3,3), iterations=1)
@@ -115,7 +102,6 @@ def dilate():
         cv.waitKey(0)
     
 def eroded ():
-       import cv2 as cv
        img = cv.imread('Photos/cat.jpg')
        canny = cv.Canny(img, 125,175)
        dilated = cv.dilate(canny, (3,3), iterations=1)
@@ -124,23 +110,18 @@ def eroded ():
        cv.waitKey(0)
 
 def resize():
-     import cv2 as cv
-     import numpy as np
      img = cv.imread('Photos/cat.jpg')
      resize = cv.resize(img, (500,500), interpolation=cv.INTER_AREA)
      cv.imshow('resized', resize)
      cv.waitKey(0)
 
 def cropped():
-     import cv2 as cv
      img = cv.imread('Photos/cat.jpg')
      cropped = img[50:200, 200:400]
      cv.imshow('cropped', cropped)
      cv.waitKey(0)
 
 def img_translation():
-     import cv2 as cv
-     import numpy as np
      img = cv.imread('Photos/cat.jpg', 0)
      rows, cols = img.shape
      M = np.float32([[1,0,100],[0,1,50]])
@@ -150,8 +131,6 @@ def img_translation():
      cv.destroyAllWindows()
 
 def img_reflection_horizontal():
-     import cv2 as cv
-     import numpy as np
      img = cv.imread('Photos/cat.jpg', 0 )
      rows, cols = img.shape
      M = np.float32([[1,0,0], [0,-1, rows], [0,0,1]])
@@ -161,8 +140,6 @@ def img_reflection_horizontal():
      cv.destroyAllWindows()
 
 def img_reflection_vertically():
-     import cv2 as cv
-     import numpy as np
      img = cv.imread('Photos/cat.jpg', 0 )
      rows, cols = img.shape
      M = np.float32([[-1,0,cols], [0,1,0], [0,0,1]])
@@ -172,8 +149,6 @@ def img_reflection_vertically():
      cv.destroyAllWindows()
 
 def img_rotation():
-     import cv2 as cv
-     import numpy as np
      img = cv.imread('Photos/cat.jpg', 0)
      rows, cols = img.shape
      M = np.float32([[1,0,0],[0,-1,rows],[0,0,-1]])
@@ -183,8 +158,6 @@ def img_rotation():
      cv.waitKey(0)     
 
 def shrink_img():
-     import numpy as np
-     import cv2 as cv
      img = cv.imread('Photos/cat.jpg', 0)
      rows, cols = img.shape
      img_shrinked = cv.resize(img, (250,200), interpolation=cv.INTER_AREA)
@@ -193,8 +166,6 @@ def shrink_img():
      cv.destroyAllWindows()
 
 def enlarge_img():
-     import numpy as np
-     import cv2 as cv
      img = cv.imread('Photos/cat.jpg', 0)
      rows, cols = img.shape
      img_enlarged = cv.resize(img, None, fx=1.5, fy=1.5, interpolation=cv.INTER_CUBIC)
@@ -203,8 +174,6 @@ def enlarge_img():
      cv.destroyAllWindows()
 
 def cropped_img():
-     import numpy as np
-     import cv2 as cv
      img = cv.imread('Photos/cat.jpg', 0)
      img_cropped = img[100:300, 100:300]
      cv.imwrite('cropped out.jpg', img_cropped)
@@ -212,8 +181,6 @@ def cropped_img():
      cv.destroyAllWindows()
 
 def shearing_x_axis():
-     import numpy as np
-     import cv2 as cv
      img = cv.imread('Photos/cat.jpg', 0)
      rows, cols = img.shape
      M = np.float32([[1,0.5,0], [0,1,0], [0,0,1]])
@@ -223,8 +190,6 @@ def shearing_x_axis():
      cv.destroyAllWindows()
 
 def shearing_y_axis():
-     import cv2 as cv
-     import numpy as np
      img = cv.imread('Photos/cat.jpg', 0)
      rows, cols = img.shape
      M = np.float32([[1,0,0],[0.5,1,0],[0,0,1]])
@@ -234,8 +199,6 @@ def shearing_y_axis():
      cv.destroyAllWindows()
 
 def contour_detection():
-     import cv2 as cv
-     import numpy as np
      img = cv.imread('Photos/cat.jpg')
      gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
      edged = cv.Canny(gray, 30,300)
@@ -248,7 +211,6 @@ def contour_detection():
      cv.destroyAllWindows()
 
 def BGR_colorSpace_split():
-     import cv2 as cv
      img = cv.imread('Photos/park.jpg')
      B,G,R = cv.split(img)
      cv.imshow('Original', img)
@@ -262,7 +224,6 @@ def BGR_colorSpace_split():
      cv.destroyAllWindows()
 
 def merge_bgr():
-     import cv2 as cv
      img = cv.imread('Photos/lady.jpg')
      cv.imshow('normal photo', img)
      B,G,R = cv.split(img)
@@ -271,7 +232,6 @@ def merge_bgr():
      cv.waitKey(0)
 
 def averaging_blur():
-     import cv2 as cv
      img = cv.imread('Photos/cats.jpg')
      cv.imshow('Cats', img)
      average = cv.blur(img, (3,3))
@@ -279,7 +239,6 @@ def averaging_blur():
      cv.waitKey(0)
 
 def median_blur():
-     import cv2 as cv
      img = cv.imread('Photos/cats.jpg')
      median = cv.medianBlur(img,3)
      cv.imshow('normal', img)
@@ -321,3 +280,17 @@ def bitwise():
      bitwise_not_circ = cv.bitwise_not(circle)
      cv.imshow('Bitwise NOT', bitwise_not_circ)
      cv.waitKey(0)
+
+def masking():
+     # masking allows us to focus on certain parts of an image
+     img = cv.imread('Photos/cats 2.jpg')
+     cv.imshow('Photo', img)
+     blank = np.zeros(img.shape[:2], dtype='uint8')
+     # dimensions of mask must be of the same size of image
+     cv.imshow('blank.', blank)
+     mask = cv.circle(blank, (img.shape[1]//2, img.shape[0]//2), 135,255,-1)
+     cv.imshow('Mask', mask)
+     masked = cv.bitwise_and(img, img, mask=mask)
+     cv.imshow('Masked', masked)
+     cv.waitKey(0)
+
