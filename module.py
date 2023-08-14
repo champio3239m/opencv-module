@@ -285,3 +285,39 @@ def median_blur():
      cv.imshow('normal', img)
      cv.imshow('median blur', median)
      cv.waitKey(0)
+
+def bilateral_blur():
+     img = cv.imread('Photos/park.jpg')
+     cv.imshow('Normal Photo', img)
+     biblur = cv.bilateralFilter(img, 10,35,25)
+     cv.imshow('BiLateral blur photo', biblur)
+     cv.waitKey(0)
+
+def bitwise():
+     blank = np.zeros((400,400), dtype='uint8')
+     #A UINT8 is an 8-bit unsigned integer (range: 0 through 255 decimal).
+     rectangle = cv.rectangle(blank.copy(),(30,30),(370,370), 255, -1)
+     # we are giving one parameter for color as it is a binary image, 255 is white
+     circle = cv.circle(blank.copy(),(200,200), 200, 255, -1  )
+     #200 is the radius 
+     cv.imshow('rectangle', rectangle)
+     cv.imshow('circle', circle)
+     #bitwise AND --> intersecting regions
+     bitwise_and= cv.bitwise_and(rectangle, circle)
+     # bitwise and took both the images and placed them on top of eachother and
+     # returned the common regions
+     cv.imshow('Bitwise AND', bitwise_and)
+     #bitwise OR --> shows intersecting & non intersecting regions
+     bitwise_or = cv.bitwise_or(rectangle, circle)
+     # bitwise or took this image and placed it on top and found the common
+     # regions and also found uncommon regions and joint them
+     cv.imshow('Bitwise OR', bitwise_or)
+     #bitwise XOR --> this shows the non intersecting regions
+     bitwise_xor = cv.bitwise_xor(rectangle, circle)
+     cv.imshow('Bitwise XOR', bitwise_xor)
+     # bitwise not --> this inverts the binary color
+     bitwise_not_rect = cv.bitwise_not(rectangle)
+     cv.imshow('Bitwise NOT', bitwise_not_rect)
+     bitwise_not_circ = cv.bitwise_not(circle)
+     cv.imshow('Bitwise NOT', bitwise_not_circ)
+     cv.waitKey(0)
