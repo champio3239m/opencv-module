@@ -88,12 +88,6 @@ def blur_gassianblur():
         cv.imshow('normal img', img)
         cv.waitKey(0)
 
-def canny_edge():
-        img = cv.imread('Photos/cat.jpg')
-        canny = cv.Canny(img, 125,175)
-        cv.imshow('canny', canny)
-        cv.waitKey(0)
-
 def dilate():
         img = cv.imread('Photos/cat.jpg')
         canny = cv.Canny(img, 125,175)
@@ -294,3 +288,84 @@ def masking():
      cv.imshow('Masked', masked)
      cv.waitKey(0)
 
+def histogram_computation_gray():
+     import matplotlib.pyplot as plt
+     img = cv.imread('Photos/cats.jpg')
+     cv.imshow('cats', img)
+     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+     cv.imshow('gray cats', gray)
+     #GrayScale Histogram
+     gray_hist = cv.calcHist([gray], [0], None,[256],[0,256])
+     plt.figure()
+     plt.title('GrayScale Histogram')
+     plt.xlabel('Bins')
+     plt.ylabel('# of pixels')
+     plt.plot(gray_hist)
+     plt.xlim([0,256])
+     plt.show()
+     cv.waitKey(0)
+
+def histogram_computation_bgr():
+     import matplotlib.pyplot as plt
+     img = cv.imread('Photos/cats.jpg')
+     cv.imshow('Cats', img)
+     blank = np.zeros(img.shape[:2], dtype='uint8')
+     mask = cv.circle(blank, (img.shape[1]//2,img.shape[0]//2), 100, 255, -1)
+     masked = cv.bitwise_and(img,img,mask=mask)
+     cv.imshow('Mask', masked)
+     plt.figure()
+     plt.title('Colour Histogram')
+     plt.xlabel('Bins')
+     plt.ylabel('# of pixels')
+     colors = ('b', 'g', 'r')
+     for i,col in enumerate(colors):
+          hist = cv.calcHist([img], [i], mask, [256], [0,256])
+          plt.plot(hist, color=col)
+          plt.xlim([0,256])
+     plt.show()
+     cv.waitKey(0)
+
+def thresholding():
+     # convert pics into binary pics, pics are either zero(black) or 255(white)
+     img = cv.imread('Photos/cat.jpg')
+     cv.imshow('normal pic', img)
+     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+     cv.imshow('grayscale pic', gray)
+     #simple Thresholding
+     threshhold, thresh  = cv.threshold(gray, 150, 255, cv.THRESH_BINARY)
+     #this looks at the image and compares each pixel value to ths threshold value
+     # and if it is above this value it set's it to 255, if its below then it sets it to 0
+     cv.imshow('threshholded pic', thresh)
+     threshhold, thresh_inv  = cv.threshold(gray, 150, 255, cv.THRESH_BINARY_INV)
+     cv.imshow('inversed thresholded pic', thresh_inv)
+     #adaptive thresholding method
+     adaptive_thresh = cv.adaptiveThreshold(gray, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 11, 3)
+     cv.imshow('Adaptive thresh image', adaptive_thresh)
+     cv.waitKey(0)
+
+def edge_detection_laplacian():
+     img = cv.imread('Photos/cats.jpg')
+     cv.imshow('Cats', img)
+     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+     cv.imshow('Grayscale Casts', gray)
+     lap = cv.Laplacian(gray, cv.CV_64F)
+     lap = np.uint8(np.absolute(lap))
+     cv.imshow('Laplacian Blur', lap)
+     cv.waitKey(0)
+
+def edge_detection_sobel():
+     img = cv.imread('Photos/cats.jpg')
+     cv.imshow('Cats', img)
+     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+     cv.imshow('Grayscale Casts', gray)
+     sobelx = cv.Sobel(gray, cv.CV_64F,1,0)
+     sobely = cv.Sobel(gray, cv.CV_64F,0,1)
+     sobel = cv.bitwise_or(sobelx, sobely)
+     cv.imshow('Sobel Blur', sobel)
+     cv.waitKey(0)
+
+def edge_detection_canny():
+        img = cv.imread('Photos/cat.jpg')
+        canny = cv.Canny(img, 125,175)
+        cv.imshow('canny', canny)
+        cv.waitKey(0)
